@@ -33,7 +33,7 @@ function App() {
     <div className="container">
      
       <h1 className="title"> Buscar CEP</h1>
-      <p className="subtitle"> Versão 1.0.3 (Elson Costa - João Marcos - João Pedro)</p>
+      <p className="subtitle"> Versão 1.0.4 (Elson Costa - João Marcos - João Pedro)</p>
 
       <div className="containerInput">
         <input 
