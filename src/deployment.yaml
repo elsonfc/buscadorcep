@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buscacep-deployment
+  labels:
+    app: buscacep
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: buscacep
+  template:
+    metadata:
+      labels:
+        app: buscacep
+    spec:
+      containers:
+      - name: buscacep
+        image: gcr.io/PROJECT_ID/buscador_cep_node
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: buscacep-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    app: buscacep
