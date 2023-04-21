@@ -53,7 +53,7 @@ jobs:
         location: ${{ secrets.GKE_ZONE }}
         
     - name: Set up Image in manifest file
-      run: sed -i "s/PROJECT_ID/$PROJECT_ID/g" deployment.yaml
+      run: sed -i "s/PROJECT_ID/$PROJECT_ID/g" ./src/deployment.yaml
         
     - name: Deploy to Kubernetes
       run: kubectl apply -f ./src/deployment.yaml
