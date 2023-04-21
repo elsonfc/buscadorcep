@@ -13,6 +13,11 @@
     color: #fff;
 }
 
+.subtitle{
+    font-size: 18px;
+    color: #8b8b8b;
+}
+
 .containerInput{
     background-color: rgba(255, 255, 255, 0.1);
     padding: 15px;
