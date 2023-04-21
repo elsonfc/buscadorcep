@@ -33,6 +33,7 @@ jobs:
     name: Build, Publish and Deploy
     runs-on: ubuntu-latest
     environment: production
+    needs: test
 
     permissions:
       contents: 'read'
