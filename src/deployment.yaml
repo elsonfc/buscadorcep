@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: buscacep
-        image: gcr.io/PROJECT_ID/buscador_cep_node
+        image: gcr.io/PROJECT_ID/buscador_cep_node:IMAGE_ID
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
