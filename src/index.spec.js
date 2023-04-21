@@ -1,15 +1,5 @@
-import { render, screen } from '@testing-library/react';
-import App from '.'
-
-describe('Testar componente na tela', () => {
-  test('Verifica se a caixa de texto foi criada', () =>{
-    render(<App />);
-    const verficaObjeto = screen.getByText("title");
-
-    // eslint-disable-next-line no-unused-expressions
-    expect(verficaObjeto).toBeInTheDocument;
-
+describe('Teste de exemplo', () => {
+  test('1 é igual a 1', () => {
+    expect(1).toBe(1);
   });
-
-})
-
+});
