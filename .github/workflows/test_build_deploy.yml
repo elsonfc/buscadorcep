@@ -11,7 +11,7 @@ env:
   IMAGE: buscador_cep_node
 
 jobs:
-  setup-build-publish:
+  setup-build-publish-deploy:
     name: Setup, Build and Publish
     runs-on: ubuntu-latest
     environment: production
@@ -45,3 +45,16 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$IMAGE:latest"
+        
+    - name: Set up GKE credentials
+      uses: google-github-actions/get-gke-credentials@v0
+      with:
+        cluster_name: ${{ secrets.GKE_CLUSTER }}
+        location: ${{ secrets.GKE_ZONE }}
+        
+    - name: Set up Image in manifest file
+      run: sed -i "s/PROJECT_ID/$PROJECT_ID/g" deployment.yaml
+        
+    - name: Deploy to Kubernetes
+      run: kubectl apply -f ./src/deployment.yaml
+
