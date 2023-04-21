@@ -9,6 +9,7 @@ function App() {
   const [input, setInput] = useState('')
   const [cep, setCep] = useState({})
 
+
   async function handleSearch(){
     
     if(input === ''){
@@ -22,7 +23,7 @@ function App() {
       setInput("")
 
     } catch {
-      alert("OPS! DEU MERDA...")
+      alert("OPS! CEP NÃO ENCONTRADO.")
       setInput("")
     }
 
@@ -32,6 +33,7 @@ function App() {
     <div className="container">
      
       <h1 className="title"> Buscar CEP</h1>
+      <p className="subtitle"> Versão 1.0.1 (Elson Costa - João Marcos - João Pedro)</p>
 
       <div className="containerInput">
         <input 
