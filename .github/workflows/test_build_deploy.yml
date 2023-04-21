@@ -57,13 +57,13 @@ jobs:
     - name: Build
       run: |-
         docker build \
-          --tag "gcr.io/$PROJECT_ID/$IMAGE:latest" \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
           .
           
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/$PROJECT_ID/$IMAGE:latest"
+        docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
         
     - name: Set up GKE credentials
       uses: google-github-actions/get-gke-credentials@v0
@@ -71,12 +71,16 @@ jobs:
         cluster_name: ${{ secrets.GKE_CLUSTER }}
         location: ${{ secrets.GKE_ZONE }}
         
+        
     - name: Set up Image in manifest file
       run: sed -i "s/PROJECT_ID/$PROJECT_ID/g" ./src/deployment.yaml
+      
+    - name: Set up Image TAG in manifest file
+      run: sed -i "s/IMAGE_ID/$GITHUB_SHA/g" ./src/deployment.yaml
         
     - name: Deploy to Kubernetes
       run: kubectl apply -f ./src/deployment.yaml
       
     - name: Update image in deployment
-      run: kubectl set image deployment/buscacep-deployment buscacep=gcr.io/$PROJECT_ID/$IMAGE:latest 
+      run: kubectl set image deployment/buscacep-deployment buscacep=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA 
 
